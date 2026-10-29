@@ -1,0 +1,7 @@
+streamlit
+pandas
+numpy
+plotly
+streamlit-option-menu
+fpdf2
+openpyxl

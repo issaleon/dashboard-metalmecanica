@@ -1,35 +1,42 @@
-# Dashboard de Control Operativo OEE - Celda de Soldadura MIG
+Tablero de mantenimiento de soldadoras MIG (Modelo v9)
 
-Sistema de monitoreo de indicadores de mantenimiento (Disponibilidad, MTBF, MTTR) y captura de datos en tiempo real mediante integración Nube (Google Forms / Google Sheets).
+Tablero interactivo que compara dos políticas de mantenimiento en una celda de soldadura MIG de una pyme metalmecánica peruana (equipos EQ-01, EQ-02 y EQ-03): el preventivo fijo (E1) y la inspección con alerta (E2), frente a la situación de referencia (E0). La comparación se hace con un balance de horas: Lᵢ = Pᵢ + Hᵢ.
 
-## 🚀 Descripción del Proyecto
-Este repositorio contiene el artefacto digital desarrollado para optimizar la disponibilidad mecánica y reducir tiempos de cambio (setup) en una celda de soldadura MIG (unidades `EQ-01`, `EQ-02`, `EQ-03`) perteneciente a una empresa del sector metalmecánico en Perú.
+Acompaña al artículo del Proyecto de Investigación Aplicada 1 (UPC) y reproduce sus Tablas 1, 2 y 3.
 
-## 🛠️ Tecnologías Utilizadas
-* **Lenguaje:** Python 3.10+
-* **Framework Web:** Streamlit
-* **Visualización Analítica:** Plotly Express & Graph Objects
-* **Base de Datos Nube:** Google Sheets (CSV Endpoint) & Google Forms (QR Code)
-* **Reportabilidad:** FPDF2
+Qué calcula
+Tabla 1: distribución referencial de paradas (85 eventos y 250 h). De ella se derivan las constantes del modelo.
+Tabla 2: Pᵢ, Hᵢ, disponibilidad mecánica y Lᵢ para E0, E1 y E2.
+Tabla 3: sensibilidad de ΔL = L₁ − L₂ frente a la detección d, la inspección m y la intervención h.
+Punto de equilibrio m*: duración de inspección a partir de la cual conviene E1 en lugar de E2.
+Módulos
+Comparativa (E0, E1, E2): indicadores, veredicto y composición del balance de horas.
+Causas de parada (Tabla 1): Pareto de horas por causa y agrupación por política.
+Sensibilidad y equilibrio (m*): Tabla 3, sensibilidad de T y curva de equilibrio.
+Datos campo (Google Sheets): registros de los checklists LUP-01 enviados desde planta por código QR.
+Ecuaciones y reporte PDF: formulación del modelo y exportación de un informe ejecutivo.
+Tecnologías
+Python 3.10 o superior
+Streamlit, con streamlit-option-menu para la navegación
+Pandas y NumPy
+Plotly (Graph Objects)
+Google Forms y Google Sheets (CSV publicado)
+FPDF2 para el reporte en PDF
+Estructura del repositorio
+codigo.py: código fuente del tablero.
+requirements.txt: dependencias para el despliegue.
+README.md: esta documentación.
+Ejecución local
+bash
+# 1. Clonar el repositorio
+git clone <url-del-repositorio>
+cd <carpeta-del-repositorio>
 
-## 📂 Estructura del Repositorio
-* `codigo.py`: Código fuente principal del tablero interactivo.
-* `requirements (1).txt`: Lista de librerías y dependencias necesarias para el despliegue.
-* `README.md`: Documentación técnica del proyecto.
+# 2. Instalar dependencias
+pip install -r requirements.txt
 
-## 📊 Módulos del Sistema
-1. **Visión General OEE:** Métricas principales en vivo, tacómetro de disponibilidad y matriz de diagnóstico Andón.
-2. **Análisis de Paradas:** Diagrama de Pareto 80/20 (causa-raíz) y análisis de horas improductivas por máquina.
-3. **Datos Campo (Google Sheets):** Trazabilidad transaccional de inspecciones autónomas LUP-01 enviadas desde la planta vía QR.
-4. **Plan & Reporte PDF:** Matriz estratégica TPM/SMED y generación de informes ejecutivos descargables.
-
-## ⚙️ Instrucciones de Ejecución Local
-```bash
-# 1. Clonar repositorio
-git clone [https://github.com/tu-usuario/dashboard-oee-metalmecanica.git](https://github.com/tu-usuario/dashboard-oee-metalmecanica.git)
-
-# 2. Instalar librerías
-pip install -r requirements (1).txt
-
-# 3. Lanzar aplicación
+# 3. Lanzar la aplicación
 streamlit run codigo.py
+Despliegue en Streamlit Community Cloud
+
+Streamlit busca un archivo llamado exactamente requirements.txt en la raíz del repositorio y codigo.py como archivo principal.
